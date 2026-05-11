@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Engineering Time Table</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        h2{
+            color: darkblue;
+        }
+
+        table{
+            width: 95%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th, td{
+            border: 1px solid black;
+            padding: 12px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        th{
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Zebra Effect */
+        tr:nth-child(even){
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(odd){
+            background-color: #dff0d8;
+        }
+
+        /* Hover Effect */
+        tr:hover{
+            background-color: #ffe699;
+            transform: scale(1.01);
+        }
+
+        td:hover{
+            background-color: #ffcccb;
+            color: darkblue;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .break{
+            background-color: lightcoral !important;
+            font-weight: bold;
+        }
+
+        .lab{
+            background-color: #87CEEB !important;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Engineering Class Time Table</h2>
+    <h3>B.Tech - CE Branch</h3>
+
+    <table>
+
+        <tr>
+            <th>Time/Day</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+        </tr>
+
+        <tr>
+            <td>10:10 - 11:00</td>
+            <td>OS</td>
+            <td>WT-UI/UX</td>
+            <td>PP</td>
+            <td>CGAVM</td>
+            <td>OOPU</td>
+        </tr>
+
+        <tr>
+            <td>11:00 - 11:50</td>
+            <td>PP</td>
+            <td>OOPU</td>
+            <td>WT-UI/UX</td>
+            <td>OS</td>
+            <td>CGAVM</td>
+        </tr>
+
+        <tr class="break">
+            <td>11:50 - 12:20</td>
+            <td colspan="5">RECESS</td>
+        </tr>
+
+        <tr>
+            <td>12:20 - 01:10</td>
+            <td>CGAVM</td>
+            <td>OS</td>
+            <td>OOPU</td>
+            <td>PP</td>
+            <td>WT-UI/UX</td>
+        </tr>
+
+        <tr>
+            <td>01:10 - 02:00</td>
+            <td>Library</td>
+            <td>CGAVM</td>
+            <td>OS</td>
+            <td>WT-UI/UX</td>
+            <td>PP</td>
+        </tr>
+
+        <tr class="break">
+            <td>02:00 - 02:10</td>
+            <td colspan="5">BREAK</td>
+        </tr>
+
+        <tr class="lab">
+            <td>02:10 - 03:00</td>
+            <td>Python Lab</td>
+            <td>OOPU Lab</td>
+            <td>CGAVM Lab</td>
+            <td>WT Lab</td>
+            <td>OS Lab</td>
+        </tr>
+
+        <tr class="lab">
+            <td>03:00 - 03:50</td>
+            <td>Python Lab</td>
+            <td>OOPU Lab</td>
+            <td>CGAVM Lab</td>
+            <td>WT Lab</td>
+            <td>OS Lab</td>
+        </tr>
+
+    </table>
+
+</body>
+</html>
