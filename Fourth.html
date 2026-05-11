@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Register Form</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            background-color: #f2f2f2;
+            margin: 20px;
+        }
+
+        form{
+            background-color: white;
+            padding: 20px;
+            width: 400px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        h2{
+            text-align: center;
+            color: darkblue;
+        }
+
+        input{
+            width: 100%;
+            padding: 8px;
+        }
+
+        button{
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background-color: darkgreen;
+        }
+
+        marquee{
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Marquee -->
+    <marquee behavior="scroll" direction="left">
+        Welcome to Engineering Registration Form
+    </marquee>
+
+    <h2>Register Form</h2>
+
+    <!-- Image -->
+    <center>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+             alt="Image"
+             width="150">
+    </center>
+
+    <br>
+
+    <form>
+
+        <label>Name:</label>
+        <input type="text" placeholder="Enter your Name">
+
+        <br><br>
+
+        <label>Email:</label>
+        <input type="email" placeholder="Enter Email">
+
+        <br><br>
+
+        <label>Password:</label>
+        <input type="password" placeholder="Enter Password">
+
+        <br><br>
+
+        <label>Contact No.:</label>
+        <input type="tel" placeholder="Enter Contact No">
+
+        <br><br>
+
+        <label>Address:</label>
+        <input type="text" placeholder="Enter Address">
+
+        <br><br>
+
+        <label>State:</label>
+        <input type="text" placeholder="Enter State">
+
+        <br><br>
+
+        <label>Gender:</label><br>
+
+        <input type="radio" name="gender"> Male
+        <input type="radio" name="gender"> Female
+
+        <br><br>
+
+        <label>Hobbies:</label><br>
+
+        <input type="checkbox"> Reading <br>
+        <input type="checkbox"> Gaming <br>
+        <input type="checkbox"> Watching Movies <br>
+        <input type="checkbox"> Listening Music
+
+        <br><br>
+
+        <!-- Hyperlink -->
+        <a href="https://www.google.com" target="_blank">
+            Visit Google
+        </a>
+
+        <br><br>
+
+        <!-- Real Audio -->
+        <label>Audio:</label><br>
+
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        </audio>
+
+        <br><br>
+
+        <!-- Real Video -->
+        <label>Video:</label><br>
+
+        <video width="300" controls>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        </video>
+
+        <br><br>
+
+        <button type="submit">Register</button>
+
+    </form>
+
+</body>
+
+</html>
