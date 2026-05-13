@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Selectors Example</title>
+
+    <style>
+
+        /* 1. Universal Selector */
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: Verdana;
+        }
+
+        /* 2. Element Selector */
+        body{
+            background-color: lightblue;
+        }
+
+        /* 3. ID Selector */
+        #main-heading{
+            color: darkred;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* 4. Class Selector */
+        .student-box{
+            width: 400px;
+            background-color: white;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        input{
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button{
+            width: 100%;
+            padding: 10px;
+            background-color: darkred;
+            color: white;
+            border: none;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1 id="main-heading">Student Login Form</h1>
+
+    <div class="student-box">
+
+        <label>Student Name:</label>
+        <input type="text" placeholder="Enter Student Name">
+        <br><br>
+
+        <label>Enrollment No:</label>
+        <input type="text" placeholder="Enter Enrollment Number">
+        <br><br>
+
+        <label>Password:</label>
+        <input type="password" placeholder="Enter Password">
+        <br><br>
+
+        <button type="submit">Login</button>
+
+    </div>
+
+</body>
+</html>
