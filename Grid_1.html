@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout with Header and Footer</title>
+
+    <style>
+        body{
+            margin:0;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#f2f2f2;
+            font-family:Arial, sans-serif;
+        }
+
+        .main{
+            width:700px;
+            height:500px;
+            display:grid;
+            grid-template-rows: 80px 1fr 80px;
+            gap:10px;
+        }
+
+        /* Header */
+        .header{
+            background:#2d3436;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:35px;
+            font-weight:bold;
+            border-radius:10px;
+        }
+
+        /* Middle Container */
+        .container{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            border:3px solid black;
+        }
+
+        /* Left Side */
+        .left{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#ff7675;
+            color:white;
+            font-size:40px;
+            font-weight:bold;
+            border-right:3px solid black;
+        }
+
+        /* Right Side */
+        .right{
+            display:grid;
+            grid-template-rows: repeat(3, 1fr);
+        }
+
+        .box{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:30px;
+            font-weight:bold;
+            color:white;
+            border-bottom:2px solid black;
+        }
+
+        .js{
+            background:#fdcb6e;
+            color:black;
+        }
+
+        .css{
+            background:#0984e3;
+        }
+
+        .java{
+            background:#00b894;
+        }
+
+        /* Footer */
+        .footer{
+            background:#2d3436;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:35px;
+            font-weight:bold;
+            border-radius:10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main">
+
+        <!-- Header -->
+        <div class="header">
+            HEADER
+        </div>
+
+        <!-- Middle Content -->
+        <div class="container">
+
+            <!-- Left Side -->
+            <div class="left">
+                Content
+            </div>
+
+            <!-- Right Side -->
+            <div class="right">
+                <div class="box js">JS</div>
+                <div class="box css">CSS</div>
+                <div class="box html">JAVA</div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            FOOTER
+        </div>
+
+    </div>
+
+</body>
+</html>
