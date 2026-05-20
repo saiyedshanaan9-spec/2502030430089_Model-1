@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saffron House — Authentic Indian Restaurant</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --saffron: #E8871A;
+      --saffron-lt: #F5A84B;
+      --saffron-dk: #C06A08;
+      --cream: #FAF5ED;
+      --dark: #1A1208;
+      --dark2: #231A0C;
+      --dark3: #2E2210;
+      --card: #2A1E0E;
+      --text: #FAF5ED;
+      --muted: #B89B72;
+      --green: #2D6A4F;
+      --red: #C0392B;
+      --border: rgba(232,135,26,.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4,.serif { font-family: 'Cormorant Garamond', serif; }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--saffron-dk); border-radius: 3px; }
+
+    /* ── PRELOADER ── */
+    #preloader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--dark);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 14px;
+      transition: opacity .6s ease;
+    }
+    #preloader.hide { opacity: 0; pointer-events: none; }
+    .loader-ring {
+      width: 56px; height: 56px;
+      border: 3px solid rgba(232,135,26,.15);
+      border-top-color: var(--saffron);
+      border-radius: 50%;
+      animation: spin .85s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loader-text {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--saffron);
+      font-size: 1.3rem;
+      letter-spacing: .18em;
+    }
+
+    /* ── TOP BAR ── */
+    #topbar {
+      background: var(--saffron-dk);
+      padding: 7px 0;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      color: rgba(255,255,255,.85);
+    }
+    #topbar a { color: rgba(255,255,255,.85); text-decoration: none; }
+    #topbar a:hover { color: #fff; }
+
+    /* ── HEADER ── */
+    #site-header {
+      background: var(--dark2);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0 14px;
+      text-align: center;
+    }
+    #site-header .brand-name {
+      font-size: clamp(2.4rem,6vw,4rem);
+      color: var(--saffron-lt);
+      letter-spacing: .06em;
+      line-height: 1;
+    }
+    #site-header .brand-sub {
+      font-size: .72rem;
+      letter-spacing: .35em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .header-rule {
+      width: 80px; height: 1px;
+      background: linear-gradient(90deg,transparent,var(--saffron),transparent);
+      margin: 8px auto 0;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: rgba(26,18,8,.96) !important;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+      position: sticky; top: 0; z-index: 1030;
+    }
+    .navbar .container { min-height: 52px; }
+    .navbar-toggler { border: 1px solid var(--saffron); padding: 5px 9px; }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23E8871A' stroke-width='2.2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    .nav-link {
+      color: var(--muted) !important;
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: 16px 16px !important;
+      transition: color .2s;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; right: 50%;
+      height: 2px; background: var(--saffron);
+      transition: left .25s, right .25s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--saffron-lt) !important; }
+    .nav-link:hover::after, .nav-link.active::after { left: 16px; right: 16px; }
+    .nav-cta {
+      background: var(--saffron);
+      color: var(--dark) !important;
+      border-radius: 2px;
+      font-weight: 600 !important;
+      padding: 10px 22px !important;
+      margin: 6px 0 6px 8px;
+      font-size: .74rem !important;
+      transition: background .2s !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--saffron-lt) !important; color: var(--dark) !important; }
+
+    /* ── HERO CAROUSEL ── */
+    #heroCarousel .carousel-item {
+      height: 88vh; min-height: 520px;
+    }
+    .hero-bg {
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(26,18,8,.82) 0%, rgba(192,106,8,.2) 100%);
+      display: flex; align-items: center;
+    }
+    .hero-text-box { max-width: 640px; }
+    .hero-eyebrow {
+      font-size: .75rem; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--saffron);
+      margin-bottom: 14px; display: block;
+    }
+    .hero-h1 {
+      font-size: clamp(2.8rem, 7vw, 5.4rem);
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+    .hero-h1 em { color: var(--saffron-lt); font-style: italic; }
+    .hero-desc {
+      color: rgba(255,255,255,.7);
+      font-size: clamp(.9rem, 1.8vw, 1.05rem);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+    .btn-saffron {
+      background: var(--saffron);
+      color: var(--dark);
+      border: none;
+      padding: 13px 34px;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .22s, transform .2s;
+    }
+    .btn-saffron:hover { background: var(--saffron-lt); transform: translateY(-2px); color: var(--dark); }
+    .btn-outline-sf {
+      background: transparent;
+      color: var(--saffron-lt);
+      border: 1.5px solid var(--saffron);
+      padding: 12px 32px;
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .22s, color .22s;
+    }
+    .btn-outline-sf:hover { background: var(--saffron); color: var(--dark); }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: rgba(232,135,26,.55);
+      border-radius: 50%;
+      padding: 16px;
+    }
+    .carousel-indicators [data-bs-target] {
+      background-color: var(--saffron);
+      width: 28px; height: 3px; border-radius: 2px;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--saffron-dk);
+      padding: 22px 0;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 700;
+      color: #fff; line-height: 1;
+    }
+    .stat-lbl { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.75); margin-top: 3px; }
+
+    /* ── SECTION UTILS ── */
+    section { padding: 88px 0; }
+    .sec-eyebrow {
+      text-align: center;
+      font-size: .72rem; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--saffron);
+      margin-bottom: 8px;
+    }
+    .sec-title {
+      text-align: center;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      color: var(--cream);
+      margin-bottom: 6px; line-height: 1.1;
+    }
+    .sec-rule {
+      width: 48px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--saffron), transparent);
+      margin: 12px auto 48px;
+    }
+
+    /* ── CATEGORY TABS ── */
+    .cat-tabs {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 8px;
+      margin-bottom: 44px;
+    }
+    .cat-tab {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 8px 20px;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all .22s;
+      font-family: 'Outfit', sans-serif;
+    }
+    .cat-tab:hover, .cat-tab.active {
+      background: var(--saffron);
+      color: var(--dark);
+      border-color: var(--saffron);
+      font-weight: 600;
+    }
+
+    /* ── FOOD CARD ── */
+    .food-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      height: 100%;
+      display: flex; flex-direction: column;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+    .food-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.55);
+      border-color: rgba(232,135,26,.45);
+    }
+    .food-card-img {
+      position: relative; overflow: hidden;
+    }
+    .food-card-img img {
+      width: 100%; height: 200px;
+      object-fit: cover; display: block;
+      transition: transform .5s;
+    }
+    .food-card:hover .food-card-img img { transform: scale(1.07); }
+    .food-badge {
+      position: absolute; top: 12px; left: 12px;
+      font-size: .65rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 2px;
+    }
+    .badge-veg { background: var(--green); color: #fff; }
+    .badge-nonveg { background: var(--red); color: #fff; }
+    .badge-new { background: var(--saffron); color: var(--dark); }
+    .badge-best { background: #7B2D8B; color: #fff; }
+    .food-rating {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(26,18,8,.85);
+      backdrop-filter: blur(4px);
+      padding: 4px 9px; border-radius: 20px;
+      font-size: .72rem; color: var(--saffron-lt);
+      display: flex; align-items: center; gap: 3px;
+    }
+    .food-card-body {
+      padding: 18px 18px 20px;
+      flex: 1; display: flex; flex-direction: column;
+    }
+    .food-card-body h5 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--cream); font-size: 1.15rem;
+      font-weight: 600; margin-bottom: 4px;
+    }
+    .food-desc {
+      color: var(--muted); font-size: .78rem;
+      line-height: 1.6; margin-bottom: 14px; flex: 1;
+    }
+    .food-footer {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 8px;
+      margin-top: auto;
+    }
+    .food-price {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--saffron); font-size: 1.25rem;
+      font-weight: 700; line-height: 1;
+    }
+    .food-price small { font-size: .7rem; color: var(--muted); font-family: 'Outfit', sans-serif; }
+    .btn-add {
+      background: transparent;
+      border: 1.5px solid var(--saffron);
+      color: var(--saffron);
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background .2s, color .2s, transform .2s;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .btn-add:hover {
+      background: var(--saffron); color: var(--dark);
+      transform: scale(1.12);
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--dark2); }
+    .serv-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 36px 28px;
+      text-align: center;
+      height: 100%;
+      transition: transform .3s, border-color .3s;
+    }
+    .serv-card:hover { transform: translateY(-5px); border-color: rgba(232,135,26,.4); }
+    .serv-icon {
+      width: 68px; height: 68px; border-radius: 50%;
+      background: rgba(232,135,26,.1);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 1.7rem; color: var(--saffron);
+      transition: background .3s;
+    }
+    .serv-card:hover .serv-icon { background: rgba(232,135,26,.22); }
+    .serv-card h5 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--cream); font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+    .serv-card p { color: var(--muted); font-size: .82rem; line-height: 1.7; }
+
+    /* ── GALLERY ── */
+    #gallery { background: var(--dark); }
+    .gallery-masonry {
+      columns: 3; column-gap: 10px;
+    }
+    @media(max-width:767px){ .gallery-masonry { columns: 2; } }
+    @media(max-width:480px){ .gallery-masonry { columns: 1; } }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 10px;
+      position: relative;
+      border-radius: 5px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%; display: block;
+      transition: transform .5s;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-over {
+      position: absolute; inset: 0;
+      background: rgba(232,135,26,0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .35s;
+    }
+    .gallery-over i {
+      color: #fff; font-size: 2rem;
+      opacity: 0; transform: scale(.5);
+      transition: opacity .35s, transform .35s;
+    }
+    .gallery-item:hover .gallery-over { background: rgba(232,135,26,.35); }
+    .gallery-item:hover .gallery-over i { opacity: 1; transform: scale(1); }
+
+    /* ── REVIEWS ── */
+    #reviews { background: var(--dark2); }
+    .review-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px 24px;
+      height: 100%;
+      position: relative;
+    }
+    .review-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4.5rem;
+      color: rgba(232,135,26,.12);
+      position: absolute;
+      top: 4px; left: 18px;
+      line-height: 1;
+    }
+    .review-stars { color: var(--saffron); font-size: .9rem; margin-bottom: 10px; }
+    .review-text { color: var(--muted); font-size: .84rem; line-height: 1.75; margin-bottom: 18px; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .reviewer img {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 2px solid var(--saffron); object-fit: cover;
+    }
+    .rev-name { color: var(--cream); font-size: .88rem; font-weight: 500; }
+    .rev-loc { color: var(--muted); font-size: .72rem; }
+
+    /* ── ABOUT STRIP ── */
+    #about { background: var(--dark3); }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap img {
+      width: 100%; border-radius: 6px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+    .about-badge {
+      position: absolute; bottom: -18px; right: -18px;
+      width: 110px; height: 110px;
+      background: var(--saffron);
+      border-radius: 50%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(232,135,26,.45);
+    }
+    .about-badge span:first-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--dark); line-height: 1;
+    }
+    .about-badge span:last-child {
+      font-size: .6rem; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(26,18,8,.75);
+    }
+    .about-list { list-style: none; padding: 0; }
+    .about-list li {
+      color: var(--muted); font-size: .88rem;
+      padding: 5px 0; display: flex; align-items: center; gap: 10px;
+    }
+    .about-list li i { color: var(--saffron); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--dark2); }
+    .form-control, .form-select {
+      background: var(--card) !important;
+      border: 1px solid rgba(232,135,26,.2) !important;
+      color: var(--cream) !important;
+      border-radius: 3px;
+      padding: 12px 16px;
+      font-family: 'Outfit', sans-serif;
+    }
+    .form-control:focus { box-shadow: 0 0 0 2px rgba(232,135,26,.28) !important; border-color: var(--saffron) !important; }
+    .form-control::placeholder { color: var(--muted) !important; }
+    .form-label { color: var(--muted); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+    .contact-info-item { display: flex; gap: 14px; margin-bottom: 24px; align-items: flex-start; }
+    .contact-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(232,135,26,.1);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--saffron); font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-info-item h6 { color: var(--cream); font-size: .88rem; margin-bottom: 2px; }
+    .contact-info-item p { color: var(--muted); font-size: .8rem; line-height: 1.6; margin: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #100C06;
+      border-top: 1px solid rgba(232,135,26,.2);
+      padding: 64px 0 28px;
+    }
+    footer h5 {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--saffron-lt); font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+    footer p, footer li, footer a {
+      color: var(--muted); font-size: .82rem;
+      text-decoration: none; line-height: 1.9;
+    }
+    footer a:hover { color: var(--saffron-lt); }
+    footer ul { list-style: none; padding: 0; }
+    .social-row { display: flex; gap: 10px; margin-top: 20px; }
+    .social-row a {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid rgba(232,135,26,.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 1rem;
+      transition: all .22s;
+    }
+    .social-row a:hover { background: var(--saffron); border-color: var(--saffron); color: var(--dark); }
+    .footer-bottom {
+      border-top: 1px solid rgba(232,135,26,.1);
+      padding-top: 22px; margin-top: 44px;
+      text-align: center;
+      color: var(--muted); font-size: .74rem;
+      letter-spacing: .08em;
+    }
+
+    /* ── MODAL ── */
+    .modal-content {
+      background: var(--dark2);
+      border: 1px solid rgba(232,135,26,.3);
+      border-radius: 6px;
+    }
+    .modal-header {
+      border-bottom: 1px solid rgba(232,135,26,.15);
+      padding: 20px 24px;
+    }
+    .modal-title { color: var(--saffron-lt); font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; }
+    .btn-close { filter: brightness(0) saturate(100%) invert(65%) sepia(35%) saturate(600%) hue-rotate(5deg); }
+    .modal-body { padding: 24px; }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .fade-up.in { opacity: 1; transform: none; }
+
+    /* ── PRODUCT HIDDEN STATE ── */
+    .food-item { transition: opacity .3s, transform .3s; }
+    .food-item.hidden { display: none; }
+
+    /* ── SPECIAL OFFER BANNER ── */
+    .offer-banner {
+      background: linear-gradient(135deg, var(--saffron-dk) 0%, var(--saffron) 100%);
+      padding: 60px 0;
+      text-align: center;
+    }
+    .offer-banner h2 {
+      font-size: clamp(2rem,4.5vw,3rem);
+      color: #fff; margin-bottom: 10px;
+    }
+    .offer-banner p { color: rgba(255,255,255,.85); margin-bottom: 24px; font-size: 1rem; }
+    .btn-white {
+      background: #fff; color: var(--saffron-dk);
+      border: none; padding: 13px 34px;
+      font-size: .82rem; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      border-radius: 2px; cursor: pointer;
+      transition: transform .2s, background .2s;
+    }
+    .btn-white:hover { transform: translateY(-2px); background: var(--cream); }
+
+    /* responsive helpers */
+    @media(max-width:991px){ .about-badge { display: none; } }
+  </style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="loader-ring"></div>
+  <div class="loader-text">Saffron House</div>
+</div>
+
+<!-- TOP BAR -->
+<div id="topbar">
+  <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <div class="d-flex gap-4">
+      <span><i class="bi bi-clock me-1"></i> Mon–Sun · 11 AM – 11 PM</span>
+      <span class="d-none d-sm-inline"><i class="bi bi-telephone me-1"></i> +91 98765 43210</span>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="#"><i class="bi bi-facebook"></i></a>
+      <a href="#"><i class="bi bi-instagram"></i></a>
+      <a href="#"><i class="bi bi-twitter-x"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div id="site-header">
+  <div class="container">
+    <h1 class="brand-name serif">Saffron House</h1>
+    <div class="header-rule"></div>
+    <p class="brand-sub">Authentic Indian Fine Dining &nbsp;·&nbsp; Est. 1998 &nbsp;·&nbsp; Surat, Gujarat</p>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item">
+          <a class="nav-link nav-cta" href="#" data-bs-toggle="modal" data-bs-target="#orderModal">Order Now</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO CAROUSEL ═══ -->
+<section id="hero" style="padding:0">
+  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=1800&q=85')">
+          <div class="hero-overlay">
+            <div class="container">
+              <div class="hero-text-box">
+                <span class="hero-eyebrow">★ Award-Winning Cuisine</span>
+                <h1 class="hero-h1">A Journey of<br/><em>Spice & Soul</em></h1>
+                <p class="hero-desc">Every dish carries centuries of tradition, perfected in our kitchen with love, the finest spices, and respect for the art of Indian cooking.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                  <a href="#menu" class="btn-saffron">Explore Menu</a>
+                  <a href="#" class="btn-outline-sf" data-bs-toggle="modal" data-bs-target="#orderModal">Reserve Table</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=1800&q=85')">
+          <div class="hero-overlay">
+            <div class="container">
+              <div class="hero-text-box">
+                <span class="hero-eyebrow">🍛 Signature Curries</span>
+                <h1 class="hero-h1">Rich, Creamy<br/><em>Masterpieces</em></h1>
+                <p class="hero-desc">Our chefs hand-grind each masala fresh every morning — the secret behind flavours that linger long after the last bite.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                  <a href="#menu" class="btn-saffron">View Menu</a>
+                  <a href="#contact" class="btn-outline-sf">Contact Us</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=1800&q=85')">
+          <div class="hero-overlay">
+            <div class="container">
+              <div class="hero-text-box">
+                <span class="hero-eyebrow">🎉 Events & Catering</span>
+                <h1 class="hero-h1">Your Celebration,<br/><em>Our Passion</em></h1>
+                <p class="hero-desc">From intimate family dinners to grand wedding banquets for 500+ guests — we bring the same magic to every event.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                  <a href="#services" class="btn-saffron">Our Services</a>
+                  <a href="#contact" class="btn-outline-sf">Get a Quote</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=1800&q=85')">
+          <div class="hero-overlay">
+            <div class="container">
+              <div class="hero-text-box">
+                <span class="hero-eyebrow">🚴 Fast Home Delivery</span>
+                <h1 class="hero-h1">Restaurant Quality<br/><em>At Your Door</em></h1>
+                <p class="hero-desc">Hot, fresh, and delivered in under 45 minutes. Order online and experience the true taste of India from your own home.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                  <a href="#" class="btn-saffron" data-bs-toggle="modal" data-bs-target="#orderModal">Order Now</a>
+                  <a href="#menu" class="btn-outline-sf">Browse Menu</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="row g-3 text-center">
+      <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-num">26+</div><div class="stat-lbl">Years of Excellence</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-num">120+</div><div class="stat-lbl">Menu Items</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-num">50k+</div><div class="stat-lbl">Happy Guests</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-item"><div class="stat-num">4.9★</div><div class="stat-lbl">Average Rating</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-12 col-lg-5 fade-up">
+        <div class="about-img-wrap">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=85" alt="Restaurant interior"/>
+          <div class="about-badge">
+            <span>26</span><span>Years</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-7 fade-up">
+        <p class="sec-eyebrow" style="text-align:left">Our Story</p>
+        <h2 class="sec-title" style="text-align:left; font-size:clamp(2rem,4vw,2.8rem)">Born from <em style="color:var(--saffron-lt); font-style:italic">Tradition</em>,<br/>Crafted with Love</h2>
+        <div class="sec-rule" style="margin-left:0; margin-right:auto"></div>
+        <p style="color:var(--muted); font-size:.9rem; line-height:1.85; margin-bottom:20px;">
+          Saffron House was founded in 1998 by Chef Arvind Sharma, who left his home in Lucknow carrying nothing but his grandmother's recipe book and an unshakeable belief that food is the most honest form of love. Today, 26 years later, that same spirit infuses every kitchen we run.
+        </p>
+        <p style="color:var(--muted); font-size:.9rem; line-height:1.85; margin-bottom:28px;">
+          We source saffron directly from Kashmir, grind our masalas fresh every morning, and use only free-range proteins. No shortcuts. No compromises. Just pure, honest Indian food — the way it was always meant to taste.
+        </p>
+        <ul class="about-list">
+          <li><i class="bi bi-check-circle-fill"></i> Hand-ground fresh spices every morning</li>
+          <li><i class="bi bi-check-circle-fill"></i> Authentic regional recipes from 6 Indian states</li>
+          <li><i class="bi bi-check-circle-fill"></i> No artificial colours, flavours, or preservatives</li>
+          <li><i class="bi bi-check-circle-fill"></i> Separate certified vegetarian kitchen</li>
+        </ul>
+        <a href="#menu" class="btn-saffron mt-4 d-inline-block">Discover Our Menu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOD MENU ═══ -->
+<section id="menu" style="background:var(--dark2)">
+  <div class="container">
+    <p class="sec-eyebrow fade-up">Handcrafted Dishes</p>
+    <h2 class="sec-title fade-up">Our Full Menu</h2>
+    <div class="sec-rule fade-up"></div>
+
+    <!-- Category Filter -->
+    <div class="cat-tabs fade-up" id="catTabs">
+      <button class="cat-tab active" data-cat="all">All Items</button>
+      <button class="cat-tab" data-cat="starters">Starters</button>
+      <button class="cat-tab" data-cat="mains">Main Course</button>
+      <button class="cat-tab" data-cat="biryani">Biryani & Rice</button>
+      <button class="cat-tab" data-cat="breads">Breads</button>
+      <button class="cat-tab" data-cat="tandoor">Tandoor</button>
+      <button class="cat-tab" data-cat="street">Street Food</button>
+      <button class="cat-tab" data-cat="desserts">Desserts</button>
+      <button class="cat-tab" data-cat="drinks">Drinks</button>
+    </div>
+
+    <div class="row g-4" id="menuGrid">
+
+      <!-- ── STARTERS ── -->
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="starters">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=80" alt="Paneer Tikka"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <span class="food-badge badge-best" style="left:auto;right:12px;">Best Seller</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.9</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Paneer Tikka</h5>
+            <p class="food-desc">Marinated cottage cheese cubes grilled in a clay oven with capsicum & onions. Served with mint chutney.</p>
+            <div class="food-footer">
+              <div class="food-price">₹310 <small>/ plate</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal" title="Add to order"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="starters">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&q=80" alt="Chicken Seekh Kebab"/>
+            <span class="food-badge badge-nonveg">Non-Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.8</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Chicken Seekh Kebab</h5>
+            <p class="food-desc">Minced chicken blended with herbs, skewered and charred over live coals for a smoky aroma.</p>
+            <div class="food-footer">
+              <div class="food-price">₹360 <small>/ plate</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="starters">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80" alt="Samosa Chaat"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <span class="food-badge badge-new" style="left:auto;right:12px;">New</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.7</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Samosa Chaat</h5>
+            <p class="food-desc">Crispy samosas crushed and topped with spiced chickpeas, tamarind chutney, yogurt & pomegranate.</p>
+            <div class="food-footer">
+              <div class="food-price">₹220 <small>/ plate</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MAIN COURSE ── -->
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="mains">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600&q=80" alt="Butter Chicken"/>
+            <span class="food-badge badge-nonveg">Non-Veg</span>
+            <span class="food-badge badge-best" style="left:auto;right:12px;">Best Seller</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.9</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Butter Chicken</h5>
+            <p class="food-desc">Tender tandoor-cooked chicken in a velvety tomato, butter and cream sauce. The dish that defines Indian cuisine globally.</p>
+            <div class="food-footer">
+              <div class="food-price">₹380 <small>/ bowl</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="mains">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&q=80" alt="Dal Makhani"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.8</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Dal Makhani</h5>
+            <p class="food-desc">Whole black lentils slow-cooked for 12 hours over a wood-fire with tomatoes, butter, and a touch of cream.</p>
+            <div class="food-footer">
+              <div class="food-price">₹260 <small>/ bowl</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="mains">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1674471668376-c3c18ee91bc3?w=600&q=80" alt="Rogan Josh"/>
+            <span class="food-badge badge-nonveg">Non-Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.8</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Kashmiri Rogan Josh</h5>
+            <p class="food-desc">Slow-braised lamb shanks in a rich Kashmiri chilli and whole-spice gravy. A royal dish from the valley.</p>
+            <div class="food-footer">
+              <div class="food-price">₹490 <small>/ bowl</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="mains">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=80" alt="Palak Paneer"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.7</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Palak Paneer</h5>
+            <p class="food-desc">Silky puréed spinach with golden-fried cottage cheese cubes, ginger, garlic, and a hint of nutmeg.</p>
+            <div class="food-footer">
+              <div class="food-price">₹290 <small>/ bowl</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="mains">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600&q=80" alt="Prawn Masala"/>
+            <span class="food-badge badge-nonveg">Non-Veg</span>
+            <span class="food-badge badge-new" style="left:auto;right:12px;">Chef's Pick</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.9</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Coastal Prawn Masala</h5>
+            <p class="food-desc">Juicy tiger prawns in a fiery coconut and tomato coastal masala. A Goan classic, perfected here.</p>
+            <div class="food-footer">
+              <div class="food-price">₹520 <small>/ bowl</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── BIRYANI ── -->
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="biryani">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=600&q=80" alt="Hyderabadi Biryani"/>
+            <span class="food-badge badge-nonveg">Non-Veg</span>
+            <span class="food-badge badge-best" style="left:auto;right:12px;">Best Seller</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 5.0</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Hyderabadi Dum Biryani</h5>
+            <p class="food-desc">Aged basmati sealed and slow-cooked with marinated mutton over a low flame. The original Nizami recipe.</p>
+            <div class="food-footer">
+              <div class="food-price">₹460 <small>/ portion</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="biryani">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1645177628172-a94c1f96debb?w=600&q=80" alt="Veg Biryani"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.6</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Garden Vegetable Biryani</h5>
+            <p class="food-desc">Fragrant basmati layered with seasonal vegetables, saffron strands, fried onions, and fresh mint.</p>
+            <div class="food-footer">
+              <div class="food-price">₹320 <small>/ portion</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="biryani">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80" alt="Chicken Biryani"/>
+            <span class="food-badge badge-nonveg">Non-Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.8</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Lucknowi Chicken Biryani</h5>
+            <p class="food-desc">Soft chicken pieces cooked in dum pukht style with kewra water, rose petals and whole spices.</p>
+            <div class="food-footer">
+              <div class="food-price">₹390 <small>/ portion</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TANDOOR ── -->
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="tandoor">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=80" alt="Tandoori Chicken"/>
+            <span class="food-badge badge-nonveg">Non-Veg</span>
+            <span class="food-badge badge-best" style="left:auto;right:12px;">Classic</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.9</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Tandoori Chicken Half</h5>
+            <p class="food-desc">Free-range chicken marinated overnight in yogurt and spices, roasted in a 500°C clay oven until perfectly charred.</p>
+            <div class="food-footer">
+              <div class="food-price">₹420 <small>/ half</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="tandoor">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=600&q=80" alt="Malai Broccoli"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <span class="food-badge badge-new" style="left:auto;right:12px;">New</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.6</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Malai Broccoli Tikka</h5>
+            <p class="food-desc">Broccoli florets coated in cream cheese and mild spices, cooked in the tandoor until lightly golden.</p>
+            <div class="food-footer">
+              <div class="food-price">₹280 <small>/ plate</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STREET FOOD ── -->
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="street">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=80" alt="Pani Puri"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.8</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Pani Puri / Gol Gappa</h5>
+            <p class="food-desc">Crispy semolina spheres filled with spiced potato & chickpea, served with three flavoured waters — a Surat staple.</p>
+            <div class="food-footer">
+              <div class="food-price">₹120 <small>/ 6 pcs</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="street">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1626508035297-0e5e7c5d2a54?w=600&q=80" alt="Vada Pav"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.5</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Mumbai Vada Pav</h5>
+            <p class="food-desc">The original Mumbai street burger — spiced potato fritter in a soft bun with three chutneys and fried green chilli.</p>
+            <div class="food-footer">
+              <div class="food-price">₹95 <small>/ piece</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── BREADS ── -->
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="breads">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=80" alt="Butter Naan"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.7</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Butter Naan</h5>
+            <p class="food-desc">Pillowy leavened flatbread baked in the tandoor and finished with generous amounts of cultured butter.</p>
+            <div class="food-footer">
+              <div class="food-price">₹60 <small>/ piece</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="breads">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600&q=80" alt="Laccha Paratha"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.6</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Laccha Paratha</h5>
+            <p class="food-desc">Multi-layered whole wheat flatbread, rolled and baked for a flaky texture with a beautifully crisp exterior.</p>
+            <div class="food-footer">
+              <div class="food-price">₹70 <small>/ piece</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── DESSERTS ── -->
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="desserts">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=600&q=80" alt="Gulab Jamun"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <span class="food-badge badge-best" style="left:auto;right:12px;">Favourite</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.9</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Gulab Jamun</h5>
+            <p class="food-desc">Soft khoya dumplings soaked overnight in rose and saffron syrup, served warm with a scoop of vanilla ice cream.</p>
+            <div class="food-footer">
+              <div class="food-price">₹160 <small>/ 3 pcs</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="desserts">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&q=80" alt="Rasmalai"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.8</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Rasmalai</h5>
+            <p class="food-desc">Soft chenna dumplings floating in cold saffron-scented milk, garnished with pistachios and dried rose petals.</p>
+            <div class="food-footer">
+              <div class="food-price">₹190 <small>/ 2 pcs</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="desserts">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?w=600&q=80" alt="Kulfi"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <span class="food-badge badge-new" style="left:auto;right:12px;">Seasonal</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.7</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Mango Kulfi</h5>
+            <p class="food-desc">Alphonso mango kulfi hand-churned with condensed milk, cardamom, and pistachios. Pure summer in a bite.</p>
+            <div class="food-footer">
+              <div class="food-price">₹140 <small>/ stick</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── DRINKS ── -->
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="drinks">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?w=600&q=80" alt="Mango Lassi"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <span class="food-badge badge-best" style="left:auto;right:12px;">Signature</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 5.0</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Mango Lassi</h5>
+            <p class="food-desc">Thick Alphonso mango blended with chilled yogurt, a pinch of cardamom and saffron. Our most ordered drink.</p>
+            <div class="food-footer">
+              <div class="food-price">₹130 <small>/ glass</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="drinks">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600&q=80" alt="Masala Chai"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.8</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Masala Chai</h5>
+            <p class="food-desc">Strong Assam tea brewed with ginger, cardamom, cinnamon, and cloves. Served in a traditional clay kulhad.</p>
+            <div class="food-footer">
+              <div class="food-price">₹80 <small>/ kulhad</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 food-item" data-cat="drinks">
+        <div class="food-card">
+          <div class="food-card-img">
+            <img src="https://images.unsplash.com/photo-1623238913973-21e45ccd5a1c?w=600&q=80" alt="Rose Sharbat"/>
+            <span class="food-badge badge-veg">Veg</span>
+            <span class="food-badge badge-new" style="left:auto;right:12px;">New</span>
+            <div class="food-rating"><i class="bi bi-star-fill"></i> 4.6</div>
+          </div>
+          <div class="food-card-body">
+            <h5>Rose Basil Sharbat</h5>
+            <p class="food-desc">Chilled rose syrup with basil seeds, lemon, and a touch of cardamom. A refreshing ancient Indian remedy.</p>
+            <div class="food-footer">
+              <div class="food-price">₹110 <small>/ glass</small></div>
+              <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#orderModal"><i class="bi bi-plus"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /menuGrid -->
+  </div>
+</section>
+
+<!-- OFFER BANNER -->
+<div class="offer-banner">
+  <div class="container">
+    <h2>Family Feast — Save 20%</h2>
+    <p>Order any 4 main courses + 4 breads + 4 desserts and get 20% off. Valid daily till 8 PM.</p>
+    <button class="btn-white" data-bs-toggle="modal" data-bs-target="#orderModal">Claim Offer</button>
+  </div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services">
+  <div class="container">
+    <p class="sec-eyebrow fade-up">What We Offer</p>
+    <h2 class="sec-title fade-up">Our Services</h2>
+    <div class="sec-rule fade-up"></div>
+    <div class="row g-4">
+      <div class="col-12 col-sm-6 col-lg-3 fade-up">
+        <div class="serv-card">
+          <div class="serv-icon"><i class="bi bi-bicycle"></i></div>
+          <h5>Home Delivery</h5>
+          <p>Fresh, piping-hot meals delivered to your door within 45 minutes across Surat city. Track your order live.</p>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3 fade-up">
+        <div class="serv-card">
+          <div class="serv-icon"><i class="bi bi-calendar-check"></i></div>
+          <h5>Online Booking</h5>
+          <p>Reserve your table in under 60 seconds from our website. Instant confirmation for any party size.</p>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3 fade-up">
+        <div class="serv-card">
+          <div class="serv-icon"><i class="bi bi-people-fill"></i></div>
+          <h5>Event Catering</h5>
+          <p>Weddings, corporate lunches, birthdays, and pujas — we cater for 20 to 2,000 guests with equal care.</p>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3 fade-up">
+        <div class="serv-card">
+          <div class="serv-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+          <h5>Fast Service</h5>
+          <p>Dine-in orders reach your table in under 18 minutes. Committed to speed without sacrificing quality.</p>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3 fade-up">
+        <div class="serv-card">
+          <div class="serv-icon"><i class="bi bi-box-seam"></i></div>
+          <h5>Takeaway Packing</h5>
+          <p>Eco-friendly, leak-proof containers designed to keep curries hot and breads soft for up to 90 minutes.</p>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3 fade-up">
+        <div class="serv-card">
+          <div class="serv-icon"><i class="bi bi-mortarboard-fill"></i></div>
+          <h5>Cooking Classes</h5>
+          <p>Monthly hands-on workshops led by our head chef. Learn the secrets behind our most popular dishes.</p>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3 fade-up">
+        <div class="serv-card">
+          <div class="serv-icon"><i class="bi bi-gift-fill"></i></div>
+          <h5>Gift Vouchers</h5>
+          <p>The perfect gift for food lovers. Vouchers available from ₹500 to ₹10,000, valid for 12 months.</p>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3 fade-up">
+        <div class="serv-card">
+          <div class="serv-icon"><i class="bi bi-shield-check"></i></div>
+          <h5>Safe & Hygienic</h5>
+          <p>5-star FSSAI certified kitchen, daily sanitation protocols, and allergen-labelled menus available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section id="gallery" style="background:var(--dark2)">
+  <div class="container">
+    <p class="sec-eyebrow fade-up">A Visual Feast</p>
+    <h2 class="sec-title fade-up">Restaurant Gallery</h2>
+    <div class="sec-rule fade-up"></div>
+    <div class="gallery-masonry fade-up">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700&q=80" alt="restaurant ambiance"/>
+        <div class="gallery-over"><i class="bi bi-zoom-in"></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=700&q=80" alt="Indian food"/>
+        <div class="gallery-over"><i class="bi bi-zoom-in"></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=700&q=80" alt="curry"/>
+        <div class="gallery-over"><i class="bi bi-zoom-in"></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=700&q=80" alt="tandoor"/>
+        <div class="gallery-over"><i class="bi bi-zoom-in"></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=700&q=80" alt="biryani"/>
+        <div class="gallery-over"><i class="bi bi-zoom-in"></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=700&q=80" alt="tikka"/>
+        <div class="gallery-over"><i class="bi bi-zoom-in"></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=700&q=80" alt="street food"/>
+        <div class="gallery-over"><i class="bi bi-zoom-in"></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=700&q=80" alt="desserts"/>
+        <div class="gallery-over"><i class="bi bi-zoom-in"></i></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=700&q=80" alt="dining"/>
+        <div class="gallery-over"><i class="bi bi-zoom-in"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REVIEWS ═══ -->
+<section id="reviews">
+  <div class="container">
+    <p class="sec-eyebrow fade-up">What Guests Say</p>
+    <h2 class="sec-title fade-up">Customer Reviews</h2>
+    <div class="sec-rule fade-up"></div>
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-4 fade-up">
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">The Butter Chicken had the most velvety, complex sauce I've ever tasted. You can tell every spice was added with intention. Absolute perfection on a plate.</p>
+          <div class="reviewer">
+            <img src="https://i.pravatar.cc/80?img=47" alt="Priya"/>
+            <div>
+              <div class="rev-name">Priya Sharma</div>
+              <div class="rev-loc">Mumbai · Google Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 fade-up">
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">We hired Saffron House for our daughter's wedding reception — 300 guests. Every single person came to compliment the food. The catering team was professional beyond words.</p>
+          <div class="reviewer">
+            <img src="https://i.pravatar.cc/80?img=32" alt="Rahul"/>
+            <div>
+              <div class="rev-name">Rahul Mehta</div>
+              <div class="rev-loc">Surat · Zomato Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 fade-up">
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">As a Hyderabadi, I am extremely picky about biryani. This was the first time outside Hyderabad that I've eaten dum biryani and felt truly at home. Phenomenal.</p>
+          <div class="reviewer">
+            <img src="https://i.pravatar.cc/80?img=21" alt="Ananya"/>
+            <div>
+              <div class="rev-name">Ananya Reddy</div>
+              <div class="rev-loc">Hyderabad · Swiggy Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 fade-up">
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text">The ambiance is stunning — warm, intimate lighting, beautiful wooden decor. Our anniversary dinner here was everything we hoped for. Staff made us feel like royalty.</p>
+          <div class="reviewer">
+            <img src="https://i.pravatar.cc/80?img=55" alt="Vikram"/>
+            <div>
+              <div class="rev-name">Vikram & Pooja Joshi</div>
+              <div class="rev-loc">Ahmedabad · Tripadvisor</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 fade-up">
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">The Mango Lassi alone is worth the visit. Thick, cold, perfectly sweet — it's the best I've had outside of Punjab. Ordered three in one sitting without regret.</p>
+          <div class="reviewer">
+            <img src="https://i.pravatar.cc/80?img=12" alt="Simran"/>
+            <div>
+              <div class="rev-name">Simran Kaur</div>
+              <div class="rev-loc">Chandigarh · Google Review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 fade-up">
+        <div class="review-card">
+          <div class="review-quote">"</div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">I've been coming here every Friday for two years. The consistency is what sets them apart — it tastes exactly the same every single time. That's a rare thing to find.</p>
+          <div class="reviewer">
+            <img src="https://i.pravatar.cc/80?img=38" alt="Arjun"/>
+            <div>
+              <div class="rev-name">Arjun Nair</div>
+              <div class="rev-loc">Surat · Regular Customer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact" style="background:var(--dark2)">
+  <div class="container">
+    <p class="sec-eyebrow fade-up">Get in Touch</p>
+    <h2 class="sec-title fade-up">Reserve Your Table</h2>
+    <div class="sec-rule fade-up"></div>
+    <div class="row g-5">
+      <div class="col-12 col-lg-7 fade-up">
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:6px; padding:40px;">
+          <div class="row g-3">
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" placeholder="Your full name"/>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-control" placeholder="you@example.com"/>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" placeholder="+91 00000 00000"/>
+            </div>
+            <div class="col-12 col-sm-6">
+              <label class="form-label">Number of Guests</label>
+              <select class="form-select">
+                <option>1 – 2 people</option>
+                <option>3 – 4 people</option>
+                <option>5 – 8 people</option>
+                <option>9 – 15 people</option>
+                <option>Large party (15+)</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Message / Special Requests</label>
+              <textarea class="form-control" rows="4" placeholder="Dietary requirements, occasion, preferred seating…"></textarea>
+            </div>
+            <div class="col-12 mt-2">
+              <button class="btn-saffron w-100">Send Reservation Request</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-5 fade-up">
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="bi bi-geo-alt-fill"></i></div>
+          <div>
+            <h6>Our Location</h6>
+            <p>12 Spice Lane, Ring Road, Surat<br/>Gujarat 395007, India</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
+          <div>
+            <h6>Phone Numbers</h6>
+            <p>+91 98765 43210 (Reservations)<br/>+91 98765 43211 (Catering)</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
+          <div>
+            <h6>Email Us</h6>
+            <p>hello@saffronhouse.in<br/>catering@saffronhouse.in</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="bi bi-clock-fill"></i></div>
+          <div>
+            <h6>Opening Hours</h6>
+            <p>Monday – Sunday<br/>Lunch: 11:30 AM – 3:30 PM<br/>Dinner: 6:30 PM – 11:00 PM</p>
+          </div>
+        </div>
+        <div style="background:var(--card); border:1px solid var(--border); border-radius:6px; padding:20px; margin-top:8px;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3719.842!2d72.8311!3d21.1702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDEwJzEyLjciTiA3MsKwNDknNTIuMCJF!5e0!3m2!1sen!2sin!4v1234567890"
+            width="100%" height="180" style="border:0; border-radius:4px; filter:invert(.88) hue-rotate(180deg);"
+            allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-12 col-md-5 col-lg-4">
+        <h5 style="font-size:2rem;">Saffron House</h5>
+        <p style="max-width:300px; line-height:1.8; margin-top:8px;">
+          Celebrating the art of Indian cuisine since 1998. Every plate is a promise of authenticity — crafted with love, tradition, and the finest spices from across India.
+        </p>
+        <div class="social-row">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+          <a href="#"><i class="bi bi-youtube"></i></a>
+          <a href="#"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#menu">Full Menu</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2">
+        <h5>Menu</h5>
+        <ul>
+          <li><a href="#menu">Starters</a></li>
+          <li><a href="#menu">Main Course</a></li>
+          <li><a href="#menu">Biryani & Rice</a></li>
+          <li><a href="#menu">Tandoor</a></li>
+          <li><a href="#menu">Street Food</a></li>
+          <li><a href="#menu">Breads</a></li>
+          <li><a href="#menu">Desserts & Drinks</a></li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-4 col-lg-4">
+        <h5>Address & Contact</h5>
+        <p><i class="bi bi-geo-alt me-2" style="color:var(--saffron)"></i>12 Spice Lane, Ring Road, Surat, Gujarat 395007</p>
+        <p><i class="bi bi-telephone me-2" style="color:var(--saffron)"></i>+91 98765 43210</p>
+        <p><i class="bi bi-envelope me-2" style="color:var(--saffron)"></i>hello@saffronhouse.in</p>
+        <p style="margin-top:16px; color:var(--saffron); font-size:.78rem; letter-spacing:.1em; text-transform:uppercase;">Download Our App</p>
+        <div class="d-flex gap-2 mt-2">
+          <a href="#" style="background:var(--card); border:1px solid var(--border); border-radius:4px; padding:8px 14px; display:flex; align-items:center; gap:6px; font-size:.75rem; color:var(--muted); text-decoration:none;">
+            <i class="bi bi-apple" style="font-size:1.1rem; color:var(--text)"></i><div><div style="color:var(--text); font-size:.65rem;">Download on</div>App Store</div>
+          </a>
+          <a href="#" style="background:var(--card); border:1px solid var(--border); border-radius:4px; padding:8px 14px; display:flex; align-items:center; gap:6px; font-size:.75rem; color:var(--muted); text-decoration:none;">
+            <i class="bi bi-google-play" style="font-size:1.1rem; color:var(--text)"></i><div><div style="color:var(--text); font-size:.65rem;">Get it on</div>Google Play</div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Saffron House Restaurant. All Rights Reserved. &nbsp;·&nbsp; Designed with ♥ in Surat, Gujarat
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ ORDER MODAL ═══ -->
+<div class="modal fade" id="orderModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-bag-check me-2" style="color:var(--saffron)"></i>Place Your Order — Saffron House</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-12 col-sm-6">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" placeholder="Your name"/>
+          </div>
+          <div class="col-12 col-sm-6">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" placeholder="+91 00000 00000"/>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Delivery Address</label>
+            <input type="text" class="form-control" placeholder="Full delivery address"/>
+          </div>
+          <div class="col-12 col-sm-6">
+            <label class="form-label">Order Type</label>
+            <select class="form-select">
+              <option>Home Delivery</option>
+              <option>Dine-In / Table Reservation</option>
+              <option>Takeaway</option>
+              <option>Catering Enquiry</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-6">
+            <label class="form-label">Preferred Time</label>
+            <input type="time" class="form-control"/>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Your Order / Special Requests</label>
+            <textarea class="form-control" rows="3" placeholder="e.g. 2x Butter Chicken, 1x Hyderabadi Biryani, Extra naan — no onions in one portion"></textarea>
+          </div>
+          <div class="col-12 mt-1">
+            <button class="btn-saffron w-100" style="font-size:.85rem;">Confirm Order &nbsp;<i class="bi bi-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Preloader
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('preloader').classList.add('hide');
+    }, 700);
+  });
+
+  // Scroll-triggered fade
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  // Active nav highlight
+  const navLinks = document.querySelectorAll('.nav-link:not(.nav-cta)');
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + cur) a.classList.add('active');
+    });
+  });
+
+  // Category filter
+  const tabs = document.querySelectorAll('.cat-tab');
+  const items = document.querySelectorAll('.food-item');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      items.forEach(item => {
+        if (cat === 'all' || item.dataset.cat === cat) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
